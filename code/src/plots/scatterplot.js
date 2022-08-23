@@ -8,17 +8,27 @@ import plotframe from "./plotframe.js";
 // Inset components.
 import twoInteractiveAxesInset from "./components/twoInteractiveAxesInset.js";
 import variableobj from "./components/variableobj.js";
-
+import sequenceInteraction from "./components/sequenceInteraction.js";
 
 
 // The template can now hold one inset per div let's say. Maybe here I want to include a modelInputVariableSelectionInset and a twoInteractiveAxesInset. The drawing on the svg should be implemented here.
 let template = `
-<div style="width: 400px; background-color: white;">
+<div>
+  <div style="width: 400px; background-color: white; float: left;">
 	<div class="scatterplot"></div>
+  </div>
+
+  <div class="correlations" style="float: left;">
+  </div>
+
 </div>
 `
 
 
+
+// The string variables allowed. Any other string variables will cause error.
+const stringVariables = ["unsteady_entropy_contour", "label", "eff_lost_unst"];
+			
 
 
 
@@ -34,6 +44,8 @@ export default class scatterplot extends plotframe{
 	constructor(data){
 		super();
 		let obj = this;
+		
+		// This isreference to the data storage.
 		obj.data = data;
 		
 		// Append the plot backbone.
@@ -49,8 +61,17 @@ export default class scatterplot extends plotframe{
 		}; // function
 		
 		
-				// Change the initial title
+		// Change the initial title
 		obj.node.querySelector("input.card-title").value = "Metadata";
+
+
+
+		
+		
+		// Additionally add in a rectangle to draw on; this will just prevent hte background zoom for now.
+		obj.si = new sequenceInteraction();
+		obj.node.querySelector("svg.plot-area").appendChild(obj.si.node);
+		obj.node.querySelector("div.correlations").appendChild(obj.si.nodescores);
 
 
 	} // constructor
@@ -72,12 +93,14 @@ export default class scatterplot extends plotframe{
 		if(obj.data.tasks){
 			
 			// `dr' and `name' are the only allowed strings.
-			variables = Object.getOwnPropertyNames( obj.data.tasks[0].metadata )
-			  .filter(name=>!["dr", "name"].includes(name))
+			// const stringVariables = ["dr", "name"]
+			
+			variables = Object.getOwnPropertyNames( obj.data.tasks[0] )
+			  .filter(name=>!stringVariables.includes(name))
 			  .map(name=>{
 				  return new variableobj( {
 					  name: name,
-					  extent: d3.extent(obj.data.tasks, t=>t.metadata[name])
+					  extent: d3.extent(obj.data.tasks, t=>t[name])
 				  } )// new variableobj
 			  });
 		} // if
@@ -141,6 +164,9 @@ export default class scatterplot extends plotframe{
 			
 			obj.refresh();
 		
+			
+			obj.si.circles = obj.node.querySelector("g.data").querySelectorAll("circle");		
+		
 		} // if
 	} // draw
 	
@@ -180,8 +206,8 @@ export default class scatterplot extends plotframe{
 			d3.select(obj.node)
 			  .select("g.data")
 			  .selectAll("circle")
-			  .attr("cx", d=>xaxis.getdrawvalue(d.metadata) )
-			  .attr("cy", d=>yaxis.getdrawvalue(d.metadata) ); 
+			  .attr("cx", d=>xaxis.getdrawvalue(d) )
+			  .attr("cy", d=>yaxis.getdrawvalue(d) ); 
 			  
 			obj.repaint();
 		} // if

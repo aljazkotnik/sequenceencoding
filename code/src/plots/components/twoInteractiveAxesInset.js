@@ -53,7 +53,6 @@ let template = `
 		<g class="markup"></g>
 		<g class="axes"></g>
 		
-		
 	</svg>
 	
 	<div class="variable-select-menus"></div>

@@ -22,12 +22,14 @@ export default class dragDropHandler{
 	} // if
 
 	
-	fetch( url )
+	let p = fetch( url )
 	  .then(res=>res.json())
 	  .then(json=>{
 		  // Now we update the data and the app.
 		  obj.ondragdropped(json);
-	  }); // fetch  
+	  }); // fetch
+
+    return p;	  
   } // loadfiles
   
 	

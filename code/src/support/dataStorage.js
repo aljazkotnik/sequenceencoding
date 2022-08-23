@@ -3,12 +3,14 @@ export default class dataStorage{
   current = undefined
   datum = undefined
   
-  distributions = undefined
+  // distributions = undefined
   
+  /*
   extent = {
 	distribution: undefined,
 	contour: undefined
   }
+  */
   
   constructor(){
     let obj = this;
@@ -21,8 +23,8 @@ export default class dataStorage{
 	
 	obj.tasks = tasks;
 	
-	obj.distributions = processDistributionData(obj.tasks);
-	obj.extent.contour = processContourLines(obj.tasks);
+	// obj.distributions = processDistributionData(obj.tasks);
+	// obj.extent.contour = processContourLines(obj.tasks);
 	
   } // settasks
   

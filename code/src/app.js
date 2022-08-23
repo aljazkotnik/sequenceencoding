@@ -62,4 +62,25 @@ dragDropArea.ondrop = (ev)=>{dataLoader.ondrop(ev)};
 dragDropArea.ondragover = (ev)=>{dataLoader.ondragover(ev)};
 
 // Dev test dataset.
-// dataLoader.loadfiles(["./assets/data/M95A60SC80TC4_psi040A95_t_c_Axt.json"]);
+let loadpromise = dataLoader.loadfiles(["./assets/turbines.json"]);
+
+
+// Set flow coefficient on hte x axis, and stage loading on hte x axis.
+loadpromise.then(function(){
+	
+	let flowcoefficient = sp.svgobj.x.menu.variables[1];
+	let stageloading = sp.svgobj.y.menu.variables[2];
+	
+	sp.svgobj.x.variable = flowcoefficient;
+	sp.svgobj.x.update();
+
+	sp.svgobj.y.variable = stageloading;
+	sp.svgobj.y.update();
+
+}) // then
+
+
+
+console.log(sp)
+
+
