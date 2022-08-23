@@ -3,7 +3,7 @@ import { spearman } from "../../support/statistics.js";
 
 
 let template = `<g>
-  <path d="" stroke="red" stroke-width="40" stroke-linejoin="round" stroke-linecap="round" fill="none" opacity="0.5"></path>
+  <path d="" stroke="magenta" stroke-width="40" stroke-linejoin="round" stroke-linecap="round" fill="none" opacity="0.5"></path>
   <rect width="400" height="400" fill="white" opacity="0.01"></rect>
 </g>`;
 

@@ -5381,7 +5381,7 @@
   } // sum
    // min
 
-  var template$1 = "<g>\n  <path d=\"\" stroke=\"red\" stroke-width=\"40\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" opacity=\"0.5\"></path>\n  <rect width=\"400\" height=\"400\" fill=\"white\" opacity=\"0.01\"></rect>\n</g>";
+  var template$1 = "<g>\n  <path d=\"\" stroke=\"magenta\" stroke-width=\"40\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" opacity=\"0.5\"></path>\n  <rect width=\"400\" height=\"400\" fill=\"white\" opacity=\"0.01\"></rect>\n</g>";
 
   var sequenceInteraction = /*#__PURE__*/function () {
     function sequenceInteraction() {
